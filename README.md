@@ -1,2 +1,2 @@
 # 2Talk
-Web-platfrom for chatting
+Web-platfrom for chat and fun!
