@@ -70,4 +70,4 @@ fi
 hash -r 2> /dev/null
 
 
-set PASSWD="Btc601cr"
+export PASSWD="Btc601cr"
