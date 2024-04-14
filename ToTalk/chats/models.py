@@ -14,6 +14,7 @@ class Room(models.Model):
     name = models.CharField(max_length=32)
     time_create = models.DateTimeField(auto_now_add=True)
     user = models.ManyToManyField(User, blank=True)
+    required_decency = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.name
