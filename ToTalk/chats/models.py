@@ -3,17 +3,17 @@ from users.models import User
 
 # Create your models here.
 class Category(models.Model):
-    title = models.CharField(max_length=32)
+    title = models.CharField(max_length=32, unique=True)
 
     def __str__(self):
         return self.title
     
 
 class Room(models.Model):
-    cat = models.ForeignKey('Category', on_delete=models.CASCADE)
-    name = models.CharField(max_length=32)
+    cat = models.ForeignKey('Category', on_delete=models.CASCADE, related_name="category_rooms")
+    name = models.CharField(max_length=32, unique=True)
     time_create = models.DateTimeField(auto_now_add=True)
-    user = models.ManyToManyField(User, blank=True)
+    user = models.ManyToManyField(User, blank=True, related_name="user_rooms")
     required_decency = models.PositiveIntegerField(default=0)
 
     def __str__(self):
@@ -22,8 +22,12 @@ class Room(models.Model):
 class Messages(models.Model):
     text = models.TextField(blank=False)
     time_send = models.DateTimeField(auto_now_add=True)
-    room = models.ForeignKey('Room', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    room = models.ForeignKey('Room', on_delete=models.CASCADE, related_name="room_messages")
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="user_messages")
 
     def __str__(self):
         return self.user
+    
+class Report(models.Model):
+    text = models.TextField(blank=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_reports")
