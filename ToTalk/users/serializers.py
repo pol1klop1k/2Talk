@@ -13,7 +13,18 @@ class UserSerializer(serializers.ModelSerializer):
         )
         return user
 
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        ret["user_decency"] = DecencySerializer(instance.user_decency).data
+        return ret
+
     class Meta:
         model = UserModel
         fields = "__all__"
         extra_kwargs = {'password': {'write_only': True}, 'email': {'required': True}}
+
+class DecencySerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Decency
+        fields = "__all__"

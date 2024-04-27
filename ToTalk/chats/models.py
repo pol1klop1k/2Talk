@@ -1,6 +1,7 @@
 from django.db import models
-from users.models import User
-
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth import get_user_model
+User = get_user_model()
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(max_length=32, unique=True)
@@ -14,7 +15,7 @@ class Room(models.Model):
     name = models.CharField(max_length=32, unique=True)
     time_create = models.DateTimeField(auto_now_add=True)
     user = models.ManyToManyField(User, blank=True, related_name="user_rooms")
-    required_decency = models.PositiveIntegerField(default=0)
+    required_decency = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10000)])
 
     def __str__(self):
         return self.name
