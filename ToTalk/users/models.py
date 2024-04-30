@@ -1,3 +1,4 @@
+from typing import Any
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 
@@ -10,6 +11,13 @@ class CustomUserManager(UserManager):
             email=email,
             **extra_fields
             )
+        decency = Decency.objects.create(user=user)
+        decency.save()
+        return user
+    
+
+    def create_superuser(self, username: str, email: str | None, password: str | None, **extra_fields: Any) -> Any:
+        user = super().create_superuser(username, email, password, **extra_fields)
         decency = Decency.objects.create(user=user)
         decency.save()
         return user
