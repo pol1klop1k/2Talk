@@ -21,5 +21,5 @@ class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = "__all__"
-        #extra_kwargs = {"cat": {"read_only": True}}
+        extra_kwargs = {"user": {"read_only": True}}
 
