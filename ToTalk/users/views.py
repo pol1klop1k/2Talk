@@ -8,7 +8,7 @@ UserModel = get_user_model()
 
 # Create your views here.
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = UserModel.objects.all()
+    queryset = UserModel.objects.all().select_related('user_decency')
     serializer_class = UserSerializer
     permission_classes = (UserPermission,)
 
