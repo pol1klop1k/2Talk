@@ -16,7 +16,7 @@ class Room(models.Model):
     time_create = models.DateTimeField(auto_now_add=True)
     user = models.ManyToManyField(User, blank=True, related_name="user_rooms")
     required_decency = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10000)])
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner_rooms")
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, default=2, related_name="owner_rooms")
 
     def __str__(self):
         return self.name
