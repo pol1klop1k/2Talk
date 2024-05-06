@@ -7,9 +7,9 @@ UserModel = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = UserModel.objects.create_user(
-            username=validated_data['username'],
-            password=validated_data['password'],
-            email=validated_data['email'],
+            username=validated_data.pop('username'),
+            password=validated_data.pop('password'),
+            email=validated_data.pop('email'),
             **validated_data
         )
         return user
@@ -23,6 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = UserModel
         fields = "__all__"
         extra_kwargs = {'password': {'write_only': True}, 'email': {'required': True}}
+        read_only_fields = ["last_login", "is_superuser", "is_staff", "is_active", "date_joined", "groups", "user_permissions"]
 
 class DecencySerializer(serializers.ModelSerializer):
     
