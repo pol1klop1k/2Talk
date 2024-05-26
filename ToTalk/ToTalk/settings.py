@@ -48,6 +48,7 @@ CORS_ALLOW_CREDENTIALS = True
 # Application definitin
 
 INSTALLED_APPS = [
+    "corsheaders",
     "daphne",
     "corsheaders",
     'django.contrib.admin',

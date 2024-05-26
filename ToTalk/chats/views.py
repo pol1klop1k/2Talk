@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect, Http404
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404, render
+from rest_framework.response import Response
 
 from django.contrib.auth import get_user_model
 UserModel = get_user_model()
@@ -30,10 +31,11 @@ class RoomViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user, cat_id=self.kwargs.get('cat_id'), user=[self.request.user])
 
 
-    @action(detail=True, methods=['post'])
+    @action(detail=True, methods=['get'])
     def join_room(self, request, pk=None, cat_id=None):
         user = request.user
         room = self.get_object()
+        print(pk, cat_id)
         if user.user_decency.current >= room.required_decency and not(room.user.filter(pk=user.pk).exists()):
             room.user.add(user)
         # return HttpResponseRedirect(redirect_to=f'http://localhost:3000/categories/{cat_id}/rooms/{pk}/')
@@ -46,7 +48,7 @@ class RoomViewSet(viewsets.ModelViewSet):
         room = self.get_object()
         if room.user.filter(pk=user.pk).exists():
             room.user.remove(user)
-        return HttpResponseRedirect(redirect_to='https://google.com')
+        return HttpResponseRedirect(redirect_to='http://google.com')
     
 
     queryset = Room.objects.all()
