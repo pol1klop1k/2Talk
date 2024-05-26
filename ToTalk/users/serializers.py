@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
             **validated_data
         )
         return user
-
+    
     def to_representation(self, instance):
         ret = super().to_representation(instance)
         ret["user_decency"] = DecencySerializer(instance.user_decency).data
@@ -24,6 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = "__all__"
         extra_kwargs = {'password': {'write_only': True}, 'email': {'required': True}}
         read_only_fields = ["last_login", "is_superuser", "is_staff", "is_active", "date_joined", "groups", "user_permissions"]
+
 
 class DecencySerializer(serializers.ModelSerializer):
     

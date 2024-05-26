@@ -5,6 +5,7 @@ from .permissions import UserPermission
 from rest_framework.response import Response
 from .serializers import UserSerializer
 from django.http import HttpResponse
+from .chatsserializers import UserIdentifySerializer
 
 from django.contrib.auth import get_user_model
 UserModel = get_user_model()
@@ -30,5 +31,5 @@ class IdentifyView(APIView):
     def get(self, request):
         user = request.user
         if user.is_authenticated:
-            return Response(UserSerializer(user).data)
+            return Response(UserIdentifySerializer(user).data)
         return HttpResponse("Unauthorized", status=401)
