@@ -2,6 +2,9 @@ from rest_framework import generics, viewsets
 from rest_framework.views import APIView
 from .serializers import UserSerializer
 from .permissions import UserPermission
+from rest_framework.response import Response
+from .serializers import UserSerializer
+from django.http import HttpResponse
 
 from django.contrib.auth import get_user_model
 UserModel = get_user_model()
@@ -22,3 +25,10 @@ class UserListView(generics.ListAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserSerializer
 '''
+
+class IdentifyView(APIView):
+    def get(self, request):
+        user = request.user
+        if user.is_authenticated:
+            return Response(UserSerializer(user).data)
+        return HttpResponse("Unauthorized", status=401)

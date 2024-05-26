@@ -22,7 +22,7 @@ class Room(models.Model):
         return self.name
 
 class Messages(models.Model):
-    text = models.TextField(blank=False)
+    text = models.TextField()
     time_send = models.DateTimeField(auto_now_add=True)
     room = models.ForeignKey('Room', on_delete=models.CASCADE, related_name="room_messages")
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="user_messages")
@@ -31,5 +31,5 @@ class Messages(models.Model):
         return self.user
     
 class Report(models.Model):
-    text = models.TextField(blank=False)
+    text = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_reports")

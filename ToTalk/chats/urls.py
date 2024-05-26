@@ -6,7 +6,7 @@ from .views import room
 chats_router = routers.DefaultRouter()
 chats_router.register(r'categories/(?P<cat_id>\d+)/rooms', RoomViewSet)
 chats_router.register(r'categories', CategoryReadViewSet)
-chats_router.register(r'report', ReportViewSet)
+chats_router.register(r'reports', ReportViewSet)
 chats_router.register(r'categories/(?P<cat_id>\d+)/rooms/(?P<room_id>\d+)/messages', MessagesViewSet)
 
 urlpatterns = [
