@@ -29,7 +29,7 @@ class User(AbstractUser):
 
 class Decency(models.Model):
     last_update_date = models.DateField(auto_now_add=True)
-    last_month = models.PositiveIntegerField(default=None, null=True)
-    last_2_weeks = models.PositiveIntegerField(default=None, null=True)
+    last_month = models.PositiveIntegerField(default=None, null=True, blank=True)
+    last_2_weeks = models.PositiveIntegerField(default=None, null=True, blank=True)
     current = models.PositiveIntegerField(default=10000)
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, related_name="user_decency")
