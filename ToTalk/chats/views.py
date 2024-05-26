@@ -1,4 +1,5 @@
 from rest_framework import generics, viewsets
+from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import RoomSerializer, CategorySerializer, ReportSerializer, MessagesSerializer
 from .permissions import ReportPermission, RoomPermission, MessagesPermission
@@ -35,7 +36,8 @@ class RoomViewSet(viewsets.ModelViewSet):
         room = self.get_object()
         if user.user_decency.current >= room.required_decency and not(room.user.filter(pk=user.pk).exists()):
             room.user.add(user)
-        return HttpResponseRedirect(redirect_to='https://google.com')
+        # return HttpResponseRedirect(redirect_to=f'http://localhost:3000/categories/{cat_id}/rooms/{pk}/')
+        return Response({"status": "ok"})
     
 
     @action(detail=True, methods=['post'])

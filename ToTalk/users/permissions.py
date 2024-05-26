@@ -5,6 +5,7 @@ class UserPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if view.action in ["list", "retrieve"]:
             return request.user.is_authenticated
+            #return True
         elif view.action in ['update', 'partial_update', 'destroy', 'create']:
             return True
         else:
