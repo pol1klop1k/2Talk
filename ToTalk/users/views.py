@@ -1,10 +1,11 @@
 from rest_framework import generics, viewsets
 from rest_framework.views import APIView
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserIconSerializer
 from .permissions import UserPermission
 from rest_framework.response import Response
 from django.http import HttpResponse
 from .chatsserializers import UserIdentifySerializer
+from .models import UserIcon
 
 from django.contrib.auth import get_user_model
 UserModel = get_user_model()
@@ -32,3 +33,7 @@ class IdentifyView(APIView):
         if user.is_authenticated:
             return Response(UserIdentifySerializer(user).data)
         return HttpResponse("Unauthorized", status=401)
+    
+class UserIconReadOnlyViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = UserIcon.objects.all()
+    serializer_class = UserIconSerializer

@@ -153,6 +153,9 @@ AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = '/admin/'
 
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+
 ASGI_APPLICATION = "ToTalk.asgi.application"
 CHANNEL_LAYERS = {
     "default": {

@@ -1,9 +1,10 @@
 from django.urls import path, include
-from .views import UserViewSet, IdentifyView
+from .views import UserViewSet, IdentifyView, UserIconReadOnlyViewSet
 
 from rest_framework import routers
 
 user_router = routers.DefaultRouter()
+user_router.register(r'icons', UserIconReadOnlyViewSet)
 user_router.register(r'', UserViewSet)
 
 urlpatterns = [
