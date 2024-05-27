@@ -48,7 +48,7 @@ class RoomViewSet(viewsets.ModelViewSet):
         room = self.get_object()
         if room.user.filter(pk=user.pk).exists():
             room.user.remove(user)
-        return HttpResponseRedirect(redirect_to='http://google.com')
+        #return HttpResponseRedirect(redirect_to='http://google.com')
     
 
     queryset = Room.objects.all()

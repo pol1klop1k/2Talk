@@ -3,7 +3,6 @@ from rest_framework.views import APIView
 from .serializers import UserSerializer
 from .permissions import UserPermission
 from rest_framework.response import Response
-from .serializers import UserSerializer
 from django.http import HttpResponse
 from .chatsserializers import UserIdentifySerializer
 
@@ -13,7 +12,7 @@ UserModel = get_user_model()
 # Create your views here.
 class UserViewSet(viewsets.ModelViewSet):
     queryset = UserModel.objects.all().select_related('user_decency')
-    serializer_class = UserSerializer
+    serializer_class = UserIdentifySerializer
     permission_classes = (UserPermission,)
 
 '''
