@@ -30,14 +30,14 @@ class RoomViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user, cat_id=self.kwargs.get('cat_id'), user=[self.request.user])
 
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=['post'])
     def join_room(self, request, pk=None, cat_id=None):
         user = request.user
         room = self.get_object()
         print(pk, cat_id)
         if user.user_decency.current >= room.required_decency and not(room.user.filter(pk=user.pk).exists()):
             room.user.add(user)
-        return HttpResponseRedirect(redirect_to='http://google.com')
+        #return HttpResponseRedirect(redirect_to='http://google.com')
     
 
     @action(detail=True, methods=['post'])
@@ -46,7 +46,7 @@ class RoomViewSet(viewsets.ModelViewSet):
         room = self.get_object()
         if room.user.filter(pk=user.pk).exists():
             room.user.remove(user)
-        return HttpResponseRedirect(redirect_to='http://google.com')
+        #return HttpResponseRedirect(redirect_to='http://google.com')
     
 
     queryset = Room.objects.all()
