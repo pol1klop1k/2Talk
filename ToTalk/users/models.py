@@ -33,3 +33,7 @@ class Decency(models.Model):
     last_2_weeks = models.PositiveIntegerField(default=None, null=True, blank=True)
     current = models.PositiveIntegerField(default=10000)
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, related_name="user_decency")
+
+class UserIcon(models.Model):
+    name = models.CharField(max_length=32)
+    picture = models.ImageField(upload_to="users/pictures/")
