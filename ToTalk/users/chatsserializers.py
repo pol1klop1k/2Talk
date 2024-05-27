@@ -15,6 +15,6 @@ class UserIdentifySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = UserModel
-        fields = ["email", "last_login", "is_superuser", "is_staff", "is_active", "date_joined", "groups", "user_permissions", "user_rooms"]
+        fields = ["username", "email", "last_login", "is_superuser", "is_staff", "is_active", "date_joined", "groups", "user_permissions", "user_rooms"]
         extra_kwargs = {'password': {'write_only': True}, 'email': {'required': True}}
         read_only_fields = ["last_login", "is_superuser", "is_staff", "is_active", "date_joined", "groups", "user_permissions"]

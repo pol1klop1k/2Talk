@@ -31,7 +31,7 @@ class RoomViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user, cat_id=self.kwargs.get('cat_id'), user=[self.request.user])
 
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=['post'])
     def join_room(self, request, pk=None, cat_id=None):
         user = request.user
         room = self.get_object()
