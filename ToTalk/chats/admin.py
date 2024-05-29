@@ -1,8 +1,9 @@
 from django.contrib import admin
 
-from .models import Category, Report
+from .models import Category, Report, Room
 # Register your models here.
 admin.site.register(Category)
+admin.site.register(Room)
 
 @admin.register(Report)
 class ReportAdmin(admin.ModelAdmin):

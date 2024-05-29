@@ -22,7 +22,7 @@ class RoomViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         category_id = self.kwargs.get('cat_id')
         get_object_or_404(Category, pk=category_id)
-        return Room.objects.filter(cat=category_id)
+        return Room.objects.filter(cat=category_id).prefetch_related("user").select_related("owner", "cat")
     
 
     def perform_create(self, serializer):
@@ -70,7 +70,7 @@ class ReportViewSet(viewsets.ModelViewSet):
 class MessagesViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         room_id = self.kwargs.get('room_id')
-        return Messages.objects.filter(room=room_id)
+        return Messages.objects.filter(room=room_id).select_related("user")
     
 
     def perform_create(self, serializer):

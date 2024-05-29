@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Room, Category, Report, Messages
-from users.serializers import UserSerializer
+from users.serializers import UserSerializer, UserIconSerializer
+
 
 from django.contrib.auth import get_user_model
 
@@ -15,6 +16,9 @@ class RoomSerializer(serializers.ModelSerializer):
         ret["user"] = UserSerializer(instance.user, many=True).data
         ret["cat"] = CategorySerializer(instance.cat).data
         ret["owner"] = UserSerializer(instance.owner).data
+        if ret["avatar"] and ret["avatar"][0] == '/':
+            ret["avatar"] = "http://127.0.0.1:8000" + ret["avatar"]
+        ret["icon"] = UserIconSerializer(instance.icon).data
         return ret
 
 

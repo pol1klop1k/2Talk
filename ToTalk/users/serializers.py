@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Decency
+from .models import Decency, UserIcon
 
 from django.contrib.auth import get_user_model
 UserModel = get_user_model()
@@ -13,10 +13,12 @@ class UserSerializer(serializers.ModelSerializer):
             **validated_data
         )
         return user
-    
+
     def to_representation(self, instance):
         ret = super().to_representation(instance)
         ret["user_decency"] = DecencySerializer(instance.user_decency).data
+        if ret["avatar"] and ret["avatar"][0] == '/':
+            ret["avatar"] = "http://127.0.0.1:8000" + ret["avatar"]
         return ret
 
     class Meta:
@@ -31,3 +33,10 @@ class DecencySerializer(serializers.ModelSerializer):
     class Meta:
         model = Decency
         fields = "__all__"
+
+class UserIconSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserIcon
+        fields = "__all__"
+        read_only_fields = ["name", "picture"]

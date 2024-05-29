@@ -25,11 +25,15 @@ class CustomUserManager(UserManager):
 class User(AbstractUser):
     objects = CustomUserManager()
     description = models.CharField(max_length=255, blank=True)
-    avatar = models.ImageField(upload_to="users/avatars/", blank=True)
-
+    avatar = models.ImageField(upload_to="users/avatars/", default="/users/avatars/default.jpg")
+    
 class Decency(models.Model):
     last_update_date = models.DateField(auto_now_add=True)
     last_month = models.PositiveIntegerField(default=None, null=True, blank=True)
     last_2_weeks = models.PositiveIntegerField(default=None, null=True, blank=True)
     current = models.PositiveIntegerField(default=10000)
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, related_name="user_decency")
+
+class UserIcon(models.Model):
+    name = models.CharField(max_length=32)
+    picture = models.ImageField(upload_to="users/pictures/")
