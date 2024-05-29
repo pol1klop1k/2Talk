@@ -1,0 +1,120 @@
+.sidebar {
+    height: 100%;
+    display: block;
+
+    &_logo {
+        position: absolute;
+        top: 0px;
+    }
+
+    &_wrapper {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        justify-content: center;
+    }
+
+    &_swiper-wrap {
+        background: $light-base-color;
+        border-radius: 20px;
+        // border: 1px solid $white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 5px;
+    }
+
+    &_swiper {
+
+        width: 100%;
+        height: 100%;
+        max-height: 250px;
+        border-radius: 20px;
+
+        &-slide {
+
+            // max-height: 65px;
+
+            &-content {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                max-width: 55px;
+                max-height: 55px;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+        }
+    }
+
+    &_list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        padding: 10px;
+        border-radius: 50px;
+        background: $base-white;
+        border: 1px solid $base-black;
+        transition: .3s;
+
+        &:hover {
+            transition: .3s;
+        }
+
+        &-item {
+            cursor: pointer;
+            border: 1px solid transparent;
+            padding: 20px;
+            background: url('../../assets/icons/button-border.svg') center no-repeat;
+            background-size: cover;
+            transition: .3s;
+            border-radius: 50%;
+
+            svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            &:hover {
+                svg {
+                    path {
+                        stroke-opacity: 1;
+                        fill-opacity: 1;
+                        transition: .3s;
+                    }
+                }
+            }
+
+            a {
+                &.active {
+                    svg {
+                        border: 1px solid $white;
+                        transition: .3s;
+
+                        path {
+                            stroke-opacity: 1;
+                            fill-opacity: 1;
+                            transition: .3s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// @media screen and (min-height: 1000px) {
+//     .sidebar {
+//         &_wrapper {
+//             justify-content: center;
+//             gap: 50px;
+//         }
+//     }
+// }
