@@ -1,0 +1,32 @@
+$black: #0B090A;
+$base-color: #161A1D;
+$light-base-color: #1E2327;
+$red: #660708;
+$light-red: #BA181B;
+$gradient: linear-gradient(0deg, $red 15%, $light-red 100%);
+$white: #FFF;
+
+$base-black: #282828;
+$base-white: #F5F5F5;
+$op-white: #f5f5f580;
+$light-blue: #9FC7FF;
+$yellow: #F3E302;
+$light-green: #9EF43F;
+$lavanda: #8671FF;
+$blue: #47E9F1;
+$pink: #FF7EAC;
+$green-blue: #4CF2D2;
+
+
+:export {
+    baseBlack: $base-black;
+    baseWhite: $base-white;
+    lightBlue: $light-blue;
+    yellow: $yellow;
+    lightGreen: $light-green;
+    lavanda: $lavanda;
+    opWhite: $op-white;
+    blue: $blue;
+    pink: $pink;
+    greenBlue: $green-blue;
+}

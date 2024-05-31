@@ -1,0 +1,118 @@
+.message_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 10px;
+
+    .message {
+        flex-direction: row-reverse;
+
+        .report {
+            bottom: -1px;
+            left: -23px;
+        }
+    }
+
+    &.another {
+        justify-content: flex-start;
+        // flex-direction: row-reverse;
+
+        .message {
+            flex-direction: row;
+
+            &_content {
+                .report {
+                    bottom: -1px;
+                    right: -23px;
+                    left: unset;
+                }
+            }
+        }
+    }
+}
+
+.message {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    &_user-icon {
+        width: 55px;
+        height: 55px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    &_name {
+        font-size: 19px;
+    }
+
+    &_text {
+        line-height: 100%;
+        font-family: 'Roboto';
+        line-height: 120%;
+        
+    }
+
+    &_content {
+
+        min-width: 150px;
+        padding: 10px;
+        border: 1px solid $base-black;
+        border-radius: 25px;
+        font-size: 20px;
+        background: $base-white;
+        max-width: 400px;
+        word-break: break-all;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        &:hover {
+            .report {
+                opacity: 1;
+                visibility: visible;
+                transition: .3s;
+            }
+        }
+    }
+}
+
+.message-enter {
+    opacity: 0;
+}
+
+.message-enter-active {
+    opacity: 1;
+    transition: opacity .5s;
+}
+
+/* Анимация для исчезновения сообщения */
+.message-exit {
+    opacity: 1;
+}
+
+.message-exit-active {
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+.report {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background: $base-white;
+    border-radius: 50%;
+    border: 1px solid $base-black;
+    padding: 7px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    position: absolute;
+}

@@ -1,0 +1,10 @@
+:export {
+  black: #0B090A;
+  basecolor: #161A1D;
+  lightbasecolor: #1E2327;
+  red: #660708;
+  lightred: #BA181B;
+  gradient: linear-gradient(0deg, #660708 15%, #BA181B 100%);
+  white: #FFF;
+  opwhite: rgba(255, 255, 255, 0.5019607843);
+}/*# sourceMappingURL=colors.css.map */
