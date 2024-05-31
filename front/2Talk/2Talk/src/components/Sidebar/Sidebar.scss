@@ -20,7 +20,6 @@
     &_swiper-wrap {
         background: $light-base-color;
         border-radius: 20px;
-        // border: 1px solid $white;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -91,30 +90,6 @@
                     }
                 }
             }
-
-            a {
-                &.active {
-                    svg {
-                        border: 1px solid $white;
-                        transition: .3s;
-
-                        path {
-                            stroke-opacity: 1;
-                            fill-opacity: 1;
-                            transition: .3s;
-                        }
-                    }
-                }
-            }
         }
     }
 }
-
-// @media screen and (min-height: 1000px) {
-//     .sidebar {
-//         &_wrapper {
-//             justify-content: center;
-//             gap: 50px;
-//         }
-//     }
-// }

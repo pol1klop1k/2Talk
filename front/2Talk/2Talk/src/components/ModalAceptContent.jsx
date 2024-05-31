@@ -2,27 +2,29 @@ import React, { useEffect, useState } from 'react'
 import axios, { chatsUrl, cookies } from '../axios';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
-export const ModalAceptContent = (roomId) => {
+export const ModalAceptContent = (props) => {
 
     const [addUser, setAddUser] = useState();
     const [room, setRoom] = useState({});
 
     const params = useParams();
 
-    const navigate = useNavigate();
+    const room_id = props.roomId ? props.roomId : params.roomId;
+    const cat_id = props.catId ? props.catId : Number.parseInt(params.id);
 
-    console.log(roomId, params.id);
+    console.log(room_id, cat_id);
+
+    const navigate = useNavigate();
 
     const joinRoom = async () => {
         console.log(cookies.get('csrftoken'));
         try {
-            const res = await axios.post(chatsUrl + params.id + '/rooms/' + roomId.roomId + '/join_room/', {}, {
+            const res = await axios.post(chatsUrl + cat_id + '/rooms/' + room_id + '/join_room/', {}, {
                 headers: {
-                    // 'Content-Type': 'multipart/form-data',
                     'X-CSRFToken': cookies.get('csrftoken')
                 }
             })
-            navigate(`/categories/${params.id}/room/${roomId.roomId}`);
+            navigate(`/categories/${cat_id}/room/${room_id}`);
         } catch (error) {
 
         }
@@ -30,8 +32,7 @@ export const ModalAceptContent = (roomId) => {
 
     const getRoom = async () => {
         try {
-            const res = await axios.get(chatsUrl + params.id + '/rooms/' + roomId.roomId + '/');
-            // console.log(res.data);
+            const res = await axios.get(chatsUrl + cat_id + '/rooms/' + room_id + '/');
             setRoom(res.data);
         } catch (error) {
             console.error(error);

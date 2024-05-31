@@ -8,6 +8,7 @@ import { CSS } from "./utils/colors";
 
 const App = () => {
   const [randomColor, setRandomColor] = useState("");
+  const [dataAttribute, setDataAttribute] = useState(true);
 
   const url = '/api/v1/users/auth/login/';
 
@@ -25,8 +26,8 @@ const App = () => {
   }, [])
 
   return (
-    <Context.Provider value={{ randomColor }}>
-      <div className="App">
+    <Context.Provider value={{ randomColor, dataAttribute, setDataAttribute }}>
+      <div className="App" data-theme={dataAttribute ? "light" : "dark"}>
         <BrowserRouter>
 
           <div className="App_content">

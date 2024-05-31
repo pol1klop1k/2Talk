@@ -15,11 +15,122 @@
 @import '../pages/CategoriesPage/CategoriesPage.scss';
 @import '../pages/RoomsPage/RoomsPage.scss';
 @import '../pages/RoomPage/RoomPage.scss';
+@import '../pages/SettingsPage/SettingsPage.scss';
+
+[data-theme="light"] {
+
+    .page-list-wrapper,
+    .talk_card,
+    .sidebar_list,
+    .page-card,
+    .settings_page-theme-button,
+    .modal {
+        border: 1px solid $base-black;
+    }
+
+    .sidebar_logo {
+        fill: $base-black
+    }
+
+    span,
+    p {
+        color: $base-black;
+    }
+}
+
+
+
+[data-theme="dark"] {
+
+    .page-list-wrapper,
+    .talk_card,
+    .sidebar_list,
+    .page-card,
+    .settings_page-theme-button,
+    .user_page-card,
+    .modal,
+    .room_page-wrapper,
+    .messenger_container-bot-input,
+    .room_sidebar-slider, 
+    .message_content,
+    .base_input {
+        border: 1px solid $base-white;
+    }
+
+    .room_page {
+        .page-head {
+            border-bottom: 1px solid $base-white;
+        }
+    }
+
+    .messenger_container-bot {
+        border-top: 1px solid $base-white;
+    }
+
+    input {
+        color: $base-white
+    }
+
+    .sidebar_list-item {
+        background: url('../assets/icons/button-border-white.svg') center no-repeat;
+        background-size: contain;
+    }
+
+    .room_sidebar-slider {
+        .swiper-slide {
+            background: url('../assets/icons/button-border-white.svg') center no-repeat;
+            background-size: contain;
+        }
+    }
+
+    .card_bg {
+        display: none;
+    }
+
+    svg {
+        path {
+            stroke: $base-white;
+        }
+    }
+
+    .sidebar_logo {
+        fill: $base-white
+    }
+
+    .page-card,
+    .user_page-card,
+    .sidebar_list,
+    .modal,
+    .messenger_container-bot,
+    #chat-message-input,
+    .messenger_container-bot-input,
+    .messenger_container-content {
+        background: $base-black;
+    }
+
+    .message {
+        * {
+            background: $base-black;
+        }
+    }
+
+    span,
+    p,
+    a,
+    button, h1 {
+        color: $base-white;
+    }
+}
 
 body {
     background: $base-white;
     font-family: 'Arbutus Slab';
     color: $base-black;
+    transition: .5s;
+
+    * {
+        transition: .5s;
+    }
 
     img {
         width: 100%;
@@ -32,9 +143,13 @@ body {
         color: $base-black;
     }
 
-    // button {
-    //     color: white;
-    // }
+    &:has([data-theme="light"]) {
+        background: $base-white;
+    }
+
+    &:has([data-theme="dark"]) {
+        background: $base-black;
+    }
 }
 
 ::-webkit-scrollbar {
@@ -88,6 +203,33 @@ body {
     height: 100%;
     // padding: 50px;
     padding: 25px;
+
+    &-wrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &-half {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+    }
+
+    &-card {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border: 1px solid $base-black;
+        border-radius: 50px;
+        background: $base-white;
+    }
 
     &-head {
         width: 100%;
@@ -191,40 +333,10 @@ body {
 
 .fadeIn {
     animation: .5s fadeIn forwards;
-    // animation-delay: .5s;
-
-    // .sidebar {
-    //     animation: .5s sidebarIn forwards;
-    // }
 }
 
 .fadeOut {
     animation: .5s fadeOut forwards;
-    // animation-delay: .5s;
-
-    // .sidebar {
-    //     animation: .5s sidebarOut forwards;
-    // }
-}
-
-@keyframes sidebarIn {
-    from {
-        transform: translateX(-100%);
-    }
-
-    to {
-        transform: translateX(0);
-    }
-}
-
-@keyframes sidebarOut {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-100%);
-    }
 }
 
 @keyframes fadeIn {
@@ -247,6 +359,30 @@ body {
 
     to {
         transform: translateY(-100%);
+        // opacity: 0;
+    }
+}
+
+@keyframes fadeInSide {
+    from {
+        // opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        // opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOutSide {
+    from {
+        // opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
         // opacity: 0;
     }
 }

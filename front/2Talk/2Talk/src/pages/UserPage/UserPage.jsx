@@ -71,12 +71,12 @@ export const UserPage = () => {
           <div className="page-container">
             <div className="page-scroll-container">
               <Sidebar />
-              <div className="user_page-wrapper">
-                <div className="user_page-half" style={{ background: randomColor }}>
+              <div className="user_page-wrapper page-wrapper">
+                <div className="user_page-half page-half" style={{ background: randomColor }}>
                   <div className="user_page-head page-head">
                     <span>User</span>
                   </div>
-                  <div className="user_page-card">
+                  <div className="user_page-card page-card">
                     <div className="user_page-profile">
                       <div className="user_page-profile-icon">
                         <img src={`${user.avatar}`} alt="" />
@@ -103,12 +103,14 @@ export const UserPage = () => {
                   <div className="user_page-card">
                     <div className="user_page-list">
                       <div className="user_page-list-scroll">
-                        {user.user_rooms?.map(room => (
+                        {user.user_rooms?.map((room, index) => (
                           <TalkCard avatar={`${room.avatar}`}
+                            key={index}
                             name={room.name}
                             decency={room.required_decency}
+                            catId={room.cat.id}
                             path={`${CATEGORIES_ROUTE}/${room.cat.id}${ROOM_ROUTE}/${room.id}`}
-                            onClick={(e) => { e.preventDefault(); console.log('123'); setModalActive(true); setComponent(<ModalAceptContent roomId={room.id} />) }}
+                            onClick={(e) => { e.preventDefault(); setModalActive(true); setComponent(<ModalAceptContent roomId={room.id} catId={room.cat.id}/>) }}
                           />
                         ))}
                       </div>

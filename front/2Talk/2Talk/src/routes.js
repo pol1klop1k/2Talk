@@ -37,7 +37,7 @@ export const publick_routes = [{
         Component: RoomsPage
     },
     {
-        path: CATEGORIES_ROUTE + '/:id' + ROOM_ROUTE + '/:id',
+        path: CATEGORIES_ROUTE + '/:id' + ROOM_ROUTE + '/:roomId',
         Component: RoomPage
     },
     {

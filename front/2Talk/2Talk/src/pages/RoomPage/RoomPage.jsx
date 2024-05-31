@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { PageLogo } from '../../components/PageLogo/PageLogo'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios, { chatsUrl, cookies, userUrl } from '../../axios';
 import { Message } from '../../components/Message/Message';
 import { Sidebar } from '../../components/Sidebar/Sidebar';
@@ -8,7 +8,6 @@ import { RoomSidebar } from './RoomSidebar';
 import { CATEGORIES_ROUTE } from '../../utils/consts';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Context } from '../../context';
-import { CSS } from '../../utils/colors';
 import { Colors } from '../../utils/colors';
 
 export const RoomPage = (props) => {
@@ -18,7 +17,6 @@ export const RoomPage = (props) => {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState({});
     const [user, setUser] = useState({});
-    // const [users, setUsers] = useState([]);
     const [bool, setBool] = useState(false);
     const [room, setRoom] = useState({});
     const chatSocketRef = useRef(null);
@@ -26,16 +24,10 @@ export const RoomPage = (props) => {
 
     const { randomColor } = useContext(Context)
 
-    const location = useLocation();
-    const path = location.pathname;
-
     const navigate = useNavigate();
 
-    const room_id = params.id
-
-    const pathParts = path.split('/');
-    const categoryIndex = pathParts.indexOf('categories');
-    const category_id = pathParts[categoryIndex + 1];
+    const roomId = params.roomId;
+    const category_id = params.id;
 
     const getIdentify = async () => {
         try {
@@ -48,9 +40,8 @@ export const RoomPage = (props) => {
 
     const getRoom = async () => {
         try {
-            const res = await axios.get(chatsUrl + category_id + '/rooms/' + params.id + '/');
+            const res = await axios.get(chatsUrl + category_id + '/rooms/' + roomId + '/');
             setRoom(res.data);
-            // setUsers(res.data.user);
         } catch (error) {
             console.error(error);
         }
@@ -58,7 +49,7 @@ export const RoomPage = (props) => {
 
     const getAllMessage = async () => {
         try {
-            const res = await axios.get(chatsUrl + category_id + '/rooms/' + params.id + '/messages/')
+            const res = await axios.get(chatsUrl + category_id + '/rooms/' + roomId + '/messages/')
             setMessages(res.data);
         } catch (error) {
 
@@ -71,7 +62,7 @@ export const RoomPage = (props) => {
             const formData = new FormData();
             formData.append('text', messageInput);
 
-            const res = await axios.post(chatsUrl + category_id + '/rooms/' + params.id + '/messages/', formData, {
+            const res = await axios.post(chatsUrl + category_id + '/rooms/' + roomId + '/messages/', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'X-CSRFToken': cookies.get('csrftoken')
@@ -83,7 +74,7 @@ export const RoomPage = (props) => {
     };
 
     const leaveFromRoom = async () => {
-        const res = await axios.get(chatsUrl + category_id + '/rooms/' + params.id + '/left_room/');
+        const res = await axios.get(chatsUrl + category_id + '/rooms/' + roomId + '/left_room/');
         navigate(CATEGORIES_ROUTE + '/' + category_id + '/rooms/');
     }
 
@@ -94,7 +85,7 @@ export const RoomPage = (props) => {
         getIdentify();
 
         chatSocketRef.current = new WebSocket(
-            'ws://localhost:8000/ws/chat/' + params.id + '/'
+            'ws://localhost:8000/ws/chat/' + roomId + '/'
         );
 
         chatSocketRef.current.onopen = () => {
@@ -107,7 +98,6 @@ export const RoomPage = (props) => {
             if (data.type == "message") {
                 setMessages(prevMessages => [...prevMessages, data]);
             } else if (data.type == "join") {
-                // setUsers(prevUsers => [...prevUsers, data]);
                 setBool(prevBool => !prevBool);
             }
         };
@@ -179,14 +169,14 @@ export const RoomPage = (props) => {
                                         value={messageInput}
                                     />
                                     <button id="chat-message-submit" onClick={submit}
-                                        onMouseEnter={e => e.target.style.background = randomColor}
-                                        onMouseLeave={e => e.target.style.background = Colors.baseWhite}>
+
+                                    >
                                         <PageLogo />
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <RoomSidebar bool={bool} category_id={category_id} room_id={room_id} onClick={leaveFromRoom} />
+                        <RoomSidebar bool={bool} category_id={category_id} room_id={roomId} onClick={leaveFromRoom} />
                     </div>
                 </div>
             </div>

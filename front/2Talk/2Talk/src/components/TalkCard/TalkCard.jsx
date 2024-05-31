@@ -3,11 +3,8 @@ import { NavLink } from 'react-router-dom'
 
 export const TalkCard = (props) => {
 
-    // console.log(props.catId); // выводит нужное значение
-
     return (
         <>
-
             <NavLink className='talk_card-link' to={{ pathname: props.path, state: {category: props.catId} }} state={props.catId} onClick={props.onClick}>
                 <div className="talk_card">
                     <div className="talk_card-wrapper">
@@ -22,7 +19,6 @@ export const TalkCard = (props) => {
                     </div>
                 </div>
             </NavLink>
-
         </>
     )
 }

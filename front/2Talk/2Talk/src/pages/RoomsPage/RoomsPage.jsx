@@ -103,9 +103,8 @@ export const RoomsPage = () => {
                                                 key={index}
                                                 name={room.name}
                                                 decency={`${room.required_decency}`}
-                                                catId={params.id}
                                                 avatar={room.avatar}
-                                                onClick={(e) => { e.preventDefault(); console.log('123'); setModalActive(true); setComponent(<ModalAceptContent roomId={room.id} />) }}
+                                                onClick={(e) => { e.preventDefault(); console.log('123'); setModalActive(true); setComponent(<ModalAceptContent roomId={room.id}/>) }}
                                             >
                                             </TalkCard>
                                         ))

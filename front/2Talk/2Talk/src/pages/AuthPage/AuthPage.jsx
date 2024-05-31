@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios, { cookies, userUrl } from '../../axios';
 import { ReactComponent as Logo } from '../../assets/icons/light-blue-logo.svg';
-import { CSS } from '../../utils/colors';
+import { CSS, Colors } from '../../utils/colors';
 import { useNavigate } from 'react-router-dom';
 import { USER_ROUTE } from '../../utils/consts';
 
@@ -23,7 +23,7 @@ export const AuthPage = ({ isLogin, toggleLogin }) => {
             setIsRegFormVisible(!isRegFormVisible);
             setIsLogFormVisible(!isLogFormVisible);
             setTransitionStage("fadeIn");
-        }, 500); // Задержка в миллисекундах, соответствующая времени анимации
+        }, 500);
     };
 
     const navigate = useNavigate();
@@ -114,7 +114,7 @@ export const AuthPage = ({ isLogin, toggleLogin }) => {
                                         onChange={(e) => setUsername(e.target.value)}
                                         value={username}
                                         onMouseEnter={e => e.target.style.borderColor = logoColor}
-                                        onMouseLeave={e => e.target.style.borderColor = CSS.baseBlack}
+                                        onMouseLeave={e => e.target.style.borderColor = Colors.baseBlack}
                                     />
                                     <input type="text"
                                         className='base_input'
@@ -122,7 +122,7 @@ export const AuthPage = ({ isLogin, toggleLogin }) => {
                                         onChange={e => setEmail(e.target.value)}
                                         value={email}
                                         onMouseEnter={e => e.target.style.borderColor = logoColor}
-                                        onMouseLeave={e => e.target.style.borderColor = CSS.baseBlack}
+                                        onMouseLeave={e => e.target.style.borderColor = Colors.baseBlack}
                                     />
                                     <input type="password"
                                         className='base_input'
@@ -130,7 +130,7 @@ export const AuthPage = ({ isLogin, toggleLogin }) => {
                                         onChange={e => setPassword(e.target.value)}
                                         value={password}
                                         onMouseEnter={e => e.target.style.borderColor = logoColor}
-                                        onMouseLeave={e => e.target.style.borderColor = CSS.baseBlack}
+                                        onMouseLeave={e => e.target.style.borderColor = Colors.baseBlack}
                                     />
                                     <button className='auth_submit' type="submit" onClick={changeAuth}>Registration</button>
                                 </form>
@@ -150,7 +150,7 @@ export const AuthPage = ({ isLogin, toggleLogin }) => {
                                         onChange={(e) => setUsername(e.target.value)}
                                         value={username}
                                         onMouseEnter={e => e.target.style.borderColor = logoColor}
-                                        onMouseLeave={e => e.target.style.borderColor = CSS.baseBlack}
+                                        onMouseLeave={e => e.target.style.borderColor = Colors.baseBlack}
                                     />
                                     <input type="password"
                                         className='base_input'
@@ -158,7 +158,7 @@ export const AuthPage = ({ isLogin, toggleLogin }) => {
                                         onChange={e => setPassword(e.target.value)}
                                         value={password}
                                         onMouseEnter={e => e.target.style.borderColor = logoColor}
-                                        onMouseLeave={e => e.target.style.borderColor = CSS.baseBlack}
+                                        onMouseLeave={e => e.target.style.borderColor = Colors.baseBlack}
                                     />
                                     <button className='auth_submit' type="submit">Login</ button>
                                 </form>
@@ -168,69 +168,6 @@ export const AuthPage = ({ isLogin, toggleLogin }) => {
                             {isRegFormVisible ? 'Not a newcomer? Keep up to talk!' : 'Newcomer? Register here!'}
                         </button>
                     </div>
-                    {/* {isRegFormVisible &&
-                        <div className={`auth_reg-form ${isRegFormVisible ? 'fade-in' : 'fade-out'}`}>
-                            <div className='auth_reg-form'>
-                                <div className="auth_header">
-                                    <Logo fill={logoColor} width={250} />
-                                    <span>Ready to talk?</span>
-                                </div>
-                                <form onSubmit={reg}>
-                                    <input type="text"
-                                        placeholder='Username'
-                                        onChange={(e) => setUsername(e.target.value)}
-                                        value={username}
-                                        onMouseEnter={e => e.target.style.borderColor = logoColor}
-                                        onMouseLeave={e => e.target.style.borderColor = CSS.baseBlack}
-                                    />
-                                    <input type="text"
-                                        placeholder='Email'
-                                        onChange={e => setEmail(e.target.value)}
-                                        value={email}
-                                        onMouseEnter={e => e.target.style.borderColor = logoColor}
-                                        onMouseLeave={e => e.target.style.borderColor = CSS.baseBlack}
-                                    />
-                                    <input type="password"
-                                        placeholder='Password'
-                                        onChange={e => setPassword(e.target.value)}
-                                        value={password}
-                                        onMouseEnter={e => e.target.style.borderColor = logoColor}
-                                        onMouseLeave={e => e.target.style.borderColor = CSS.baseBlack}
-                                    />
-                                    <button className='auth_submit' type="submit" onClick={changeForm}>Registration</button>
-                                    <button className='change_form' onClick={changeForm}>Not a newcomer? <span>Keep up to talk!</span></button>
-                                </form>
-                            </div>
-                        </div>
-                    }
-                    {isLogFormVisible &&
-                        <div className={`auth_log-form ${isLogFormVisible ? 'fade-in' : 'fade-out'}`}>
-                            <div className="auth_log-form">
-                                <div className="auth_header">
-                                    <Logo fill={logoColor} width={270} />
-                                    <span>Ready to talk?</span>
-                                </div>
-                                <form onSubmit={login}>
-                                    <input type="text"
-                                        placeholder='Username'
-                                        onChange={(e) => setUsername(e.target.value)}
-                                        value={username}
-                                        onMouseEnter={e => e.target.style.borderColor = logoColor}
-                                        onMouseLeave={e => e.target.style.borderColor = CSS.baseBlack}
-                                    />
-                                    <input type="password"
-                                        placeholder='Password'
-                                        onChange={e => setPassword(e.target.value)}
-                                        value={password}
-                                        onMouseEnter={e => e.target.style.borderColor = logoColor}
-                                        onMouseLeave={e => e.target.style.borderColor = CSS.baseBlack}
-                                    />
-                                    <button className='auth_submit' type="submit" onClick={toggleLogin}>Login</button>
-                                    <button className='change_form' onClick={changeForm}>Not a newcomer? <span>Keep up to talk!</span></button>
-                                </form>
-                            </div>
-                        </div>
-                    } */}
                 </div >
             </div >
         </>
