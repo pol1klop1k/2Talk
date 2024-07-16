@@ -1,0 +1,48 @@
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, useLocation } from "react-router-dom";
+import { AppRouter } from "./components/AppRouter";
+import { Sidebar } from "./components/Sidebar/Sidebar";
+import axios, { chatsUrl } from "./axios";
+import { Context } from "./context";
+import { CSS } from "./utils/colors";
+import { AUTH_ROUTE } from "./utils/consts";
+
+const App = () => {
+  const [randomColor, setRandomColor] = useState("");
+  const [dataAttribute, setDataAttribute] = useState(true);
+
+  const location = window.location.pathname
+
+  const url = '/api/v1/users/auth/login/';
+
+  const getToken = () => {
+    axios.get(
+      url
+    ).then(data => data)
+  }
+
+  useEffect(() => {
+    const randomCssColor = CSS[Object.keys(CSS)[Math.floor(Math.random() * Object.keys(CSS).length)]];
+    setRandomColor(randomCssColor);
+
+    getToken();
+  }, [])
+
+  return (
+    <Context.Provider value={{ randomColor, dataAttribute, setDataAttribute }}>
+      <div className="App" data-theme={dataAttribute ? "light" : "dark"}>
+        <BrowserRouter>
+
+          <div className="App_content">
+            {location !== '/' && location !== AUTH_ROUTE &&
+              < Sidebar />
+            }
+            <AppRouter />
+          </div>
+        </BrowserRouter>
+      </div>
+    </Context.Provider>
+  );
+}
+
+export default App;

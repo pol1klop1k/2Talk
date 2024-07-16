@@ -1,0 +1,163 @@
+.sidebar_overflow {
+
+    height: 100%;
+
+    &.mobile {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        background: #00000038;
+        z-index: 2;
+        opacity: 0;
+        visibility: hidden;
+        transition: .5s;
+    }
+
+    &.open {
+        opacity: 1;
+        visibility: visible;
+        transition: .5s;
+    }
+}
+
+.sidebar {
+    height: 100%;
+    display: block;
+    background: $base-white;
+
+    &_mobil-cross {
+        display: none;
+    }
+
+    &_logo {
+        position: absolute;
+        top: 25px;
+    }
+
+    &_wrapper {
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px;
+        justify-content: center;
+    }
+
+    &_swiper-wrap {
+        background: $light-base-color;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 5px;
+    }
+
+    &_swiper {
+
+        width: 100%;
+        height: 100%;
+        max-height: 250px;
+        border-radius: 20px;
+
+        &-slide {
+
+            // max-height: 65px;
+
+            &-content {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                max-width: 55px;
+                max-height: 55px;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+        }
+    }
+
+    &_list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        padding: 10px;
+        border-radius: 50px;
+        background: $base-white;
+        border: 1px solid $base-black;
+        transition: .3s;
+
+        &:hover {
+            transition: .3s;
+        }
+
+        &-item {
+            cursor: pointer;
+            border: 1px solid transparent;
+            padding: 20px;
+            background: url('../../assets/icons/button-border.svg') center no-repeat;
+            background-size: cover;
+            transition: .3s;
+            border-radius: 50%;
+
+            svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            &:hover {
+                svg {
+                    path {
+                        stroke-opacity: 1;
+                        fill-opacity: 1;
+                        transition: .3s;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: -154px;
+        border-right: 1px solid $base-black;
+        transition: .5s;
+
+        &_wrapper {
+            justify-content: flex-start;
+            gap: 30px;
+        }
+
+        &_logo {
+            position: static;
+        }
+
+        &_mobil-cross {
+            background: $base-white;
+            display: block;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            right: -61px;
+            top: 45px;
+            padding: 5px;
+            border-radius: 0px 50% 50% 0px;
+            z-index: -1;
+            border: 1px solid $base-black;
+            border-left: 0;
+        }
+
+        &.open {
+            left: 0;
+            transition: .5s;
+        }
+    }
+}
